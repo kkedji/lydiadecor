@@ -72,12 +72,21 @@ export default function RealisationsPage() {
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <Image
-                    src={realisation.image}
-                    alt={realisation.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  {realisation.videos && realisation.videos.length > 0 ? (
+                    <video
+                      src={realisation.videos[0]}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      controls
+                      preload="metadata"
+                    />
+                  ) : (
+                    <Image
+                      src={realisation.image}
+                      alt={realisation.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
@@ -91,7 +100,17 @@ export default function RealisationsPage() {
                   </h3>
                   <p className="text-gray-600 mb-4">{realisation.description}</p>
                   {realisation.details && (
-                    <p className="text-sm text-gray-500 italic">{realisation.details}</p>
+                    <p className="text-sm text-gray-500 italic mb-3">{realisation.details}</p>
+                  )}
+                  {realisation.videos && realisation.videos.length > 0 && (
+                    <div className="mt-4">
+                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent-600">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+                        </svg>
+                        Vidéo disponible
+                      </span>
+                    </div>
                   )}
                 </div>
               </motion.div>

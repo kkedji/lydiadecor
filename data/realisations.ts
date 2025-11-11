@@ -5,6 +5,7 @@ export interface Realisation {
   description: string
   image: string
   images?: string[]
+  videos?: string[]
   date: string
   client?: string
   details?: string

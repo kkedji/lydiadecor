@@ -50,7 +50,7 @@ export default function HeroSection() {
             className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
           >
             <div>
-              <div className="text-4xl font-bold text-primary-600">500+</div>
+              <div className="text-4xl font-bold text-primary-600">25+</div>
               <div className="text-gray-600 mt-2">Projets réalisés</div>
             </div>
             <div>
@@ -58,7 +58,7 @@ export default function HeroSection() {
               <div className="text-gray-600 mt-2">Clients satisfaits</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary-600">15+</div>
+              <div className="text-4xl font-bold text-primary-600">5+</div>
               <div className="text-gray-600 mt-2">Années d'expérience</div>
             </div>
           </motion.div>

@@ -56,7 +56,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Téléphone</h3>
-                    <p className="text-gray-600">+228 90 12 14 58</p>
+                    <p className="text-gray-600">+228 90 91 36 65</p>
                     <p className="text-sm text-gray-500">Lun - Ven : 9h - 18h</p>
                   </div>
                 </div>
@@ -69,8 +69,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:lydiaestuolk@gmail.com" className="text-primary-600 hover:text-primary-700 transition-colors">
-                      lydiaestuolk@gmail.com
+                    <a href="mailto:estuolklyly@gmail.com" className="text-primary-600 hover:text-primary-700 transition-colors">
+                      estuolklyly@gmail.com
                     </a>
                     <p className="text-sm text-gray-500">Réponse sous 24h</p>
                   </div>
@@ -144,13 +144,13 @@ export default function ContactPage() {
               <div className="border-t border-green-200 pt-6">
                 <h4 className="font-semibold text-gray-900 mb-4 text-center">Ou envoyez-nous un email</h4>
                 <a
-                  href="mailto:lydiaestuolk@gmail.com"
+                  href="mailto:estuolklyly@gmail.com"
                   className="flex items-center justify-center gap-3 bg-white text-gray-700 px-6 py-3 rounded-lg hover:shadow-md transition-all duration-200"
                 >
                   <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span className="font-semibold">lydiaestuolk@gmail.com</span>
+                  <span className="font-semibold">estuolklyly@gmail.com</span>
                 </a>
               </div>
             </motion.div>
