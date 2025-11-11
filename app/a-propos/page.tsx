@@ -45,7 +45,7 @@ export default function AProposPage() {
                   l'envie de transformer des espaces en véritables havres de paix.
                 </p>
                 <p>
-                  Avec plus de 15 ans d'expérience, notre équipe met son expertise au
+                  Avec plus de 5 ans d'expérience, notre équipe met son expertise au
                   service de vos projets, qu'il s'agisse d'une simple rénovation ou
                   d'un aménagement complet.
                 </p>
