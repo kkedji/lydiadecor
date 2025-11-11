@@ -85,33 +85,41 @@ export default function DevisPage() {
     const devisNumber = generateDevisNumber()
     const doc = new jsPDF()
 
-    // En-tête
-    doc.setFontSize(24)
-    doc.setTextColor(147, 51, 234) // Couleur primary
-    doc.text('Lydia Décor', 20, 20)
+    // Logo en haut à gauche
+    try {
+      const logo = new Image()
+      logo.src = '/logos/logo-accueil.png'
+      doc.addImage(logo, 'PNG', 15, 10, 30, 30)
+    } catch (error) {
+      // Si le logo n'est pas disponible, afficher le texte
+      doc.setFontSize(24)
+      doc.setTextColor(147, 51, 234)
+      doc.text('Lydia Décor', 20, 20)
+    }
     
+    // Informations de l'entreprise
     doc.setFontSize(10)
     doc.setTextColor(100)
-    doc.text('Kpogan, Lomé, Togo', 20, 27)
-    doc.text('Tél: +228 90 91 36 65', 20, 32)
-    doc.text('Email: estuolklyly@gmail.com', 20, 37)
+    doc.text('Kpogan, Lomé, Togo', 50, 20)
+    doc.text('Tél: +228 90 91 36 65', 50, 25)
+    doc.text('Email: estuolklyly@gmail.com', 50, 30)
 
     // Numéro de devis
     doc.setFontSize(16)
     doc.setTextColor(0)
-    doc.text(`DEVIS N° ${devisNumber}`, 20, 50)
+    doc.text(`DEVIS N° ${devisNumber}`, 20, 55)
     
     doc.setFontSize(10)
-    doc.text(`Date: ${new Date().toLocaleDateString('fr-FR')}`, 20, 57)
+    doc.text(`Date: ${new Date().toLocaleDateString('fr-FR')}`, 20, 62)
 
     // Informations client
     doc.setFontSize(12)
-    doc.text('Client:', 120, 50)
+    doc.text('Client:', 120, 55)
     doc.setFontSize(10)
-    doc.text(clientName, 120, 57)
-    if (clientEmail) doc.text(clientEmail, 120, 62)
-    if (clientPhone) doc.text(clientPhone, 120, 67)
-    if (clientAddress) doc.text(clientAddress, 120, 72)
+    doc.text(clientName, 120, 62)
+    if (clientEmail) doc.text(clientEmail, 120, 67)
+    if (clientPhone) doc.text(clientPhone, 120, 72)
+    if (clientAddress) doc.text(clientAddress, 120, 77)
 
     // Tableau des lignes
     const tableData = lines.map(line => [
@@ -122,7 +130,7 @@ export default function DevisPage() {
     ])
 
     autoTable(doc, {
-      startY: 85,
+      startY: 90,
       head: [['Description', 'Quantité', 'Prix Unitaire', 'Total']],
       body: tableData,
       foot: [[
