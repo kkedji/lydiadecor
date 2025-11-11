@@ -141,69 +141,91 @@ export default function AProposPage() {
       {/* Process Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">
-              Notre Processus
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Comment nous travaillons avec vous
-            </p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            {[
-              {
-                step: '01',
-                title: 'Consultation Initiale',
-                description: 'Rencontre pour comprendre vos besoins, votre style et votre budget'
-              },
-              {
-                step: '02',
-                title: 'Conception & Proposition',
-                description: 'Création de plans, moodboards et sélection de produits adaptés'
-              },
-              {
-                step: '03',
-                title: 'Validation & Ajustements',
-                description: 'Révisions et affinements jusqu\'à votre entière satisfaction'
-              },
-              {
-                step: '04',
-                title: 'Réalisation',
-                description: 'Mise en œuvre du projet avec suivi et coordination'
-              },
-              {
-                step: '05',
-                title: 'Livraison Finale',
-                description: 'Installation finale et présentation de votre nouvel espace'
-              }
-            ].map((process, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Processus - Colonne gauche */}
+            <div>
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex gap-6 mb-8 last:mb-0"
+                className="mb-12"
               >
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                    {process.step}
-                  </div>
-                </div>
-                <div className="flex-grow pt-2">
-                  <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
-                    {process.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg">{process.description}</p>
-                </div>
+                <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">
+                  Notre Processus
+                </h2>
+                <p className="text-xl text-gray-600">
+                  Comment nous travaillons avec vous
+                </p>
               </motion.div>
-            ))}
+
+              <div className="space-y-8">
+                {[
+                  {
+                    step: '01',
+                    title: 'Consultation Initiale',
+                    description: 'Rencontre pour comprendre vos besoins, votre style et votre budget'
+                  },
+                  {
+                    step: '02',
+                    title: 'Conception & Proposition',
+                    description: 'Création de plans, moodboards et sélection de produits adaptés'
+                  },
+                  {
+                    step: '03',
+                    title: 'Validation & Ajustements',
+                    description: 'Révisions et affinements jusqu\'à votre entière satisfaction'
+                  },
+                  {
+                    step: '04',
+                    title: 'Réalisation',
+                    description: 'Mise en œuvre du projet avec suivi et coordination'
+                  },
+                  {
+                    step: '05',
+                    title: 'Livraison Finale',
+                    description: 'Installation finale et présentation de votre nouvel espace'
+                  }
+                ].map((process, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex gap-6"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        {process.step}
+                      </div>
+                    </div>
+                    <div className="flex-grow pt-2">
+                      <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
+                        {process.title}
+                      </h3>
+                      <p className="text-gray-600 text-lg">{process.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Logo - Colonne droite */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center items-center"
+            >
+              <div className="relative w-full max-w-md aspect-square">
+                <Image
+                  src="/logos/logo-apropos.png"
+                  alt="Lydia Décor Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

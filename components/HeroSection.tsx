@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export default function HeroSection() {
@@ -20,6 +21,17 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <Image
+                src="/logos/logo-accueil.png"
+                alt="Lydia Décor"
+                width={200}
+                height={200}
+                className="object-contain"
+              />
+            </div>
+
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
               Créez l'intérieur de vos <span className="text-primary-600">rêves</span>
             </h1>
