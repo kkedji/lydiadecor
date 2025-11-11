@@ -129,7 +129,7 @@ export default function ContactPage() {
                   Pour une réponse rapide, envoyez-nous un message directement
                 </p>
                 <a
-                  href="https://wa.me/22898010907"
+                  href="https://wa.me/22890913665"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 hover:shadow-xl transition-all duration-200"

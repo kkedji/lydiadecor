@@ -146,8 +146,8 @@ export default function DevisPage() {
     doc.setFontSize(10)
     doc.setTextColor(100)
     doc.text('Kpogan, Lomé, Togo', 20, 27)
-    doc.text('Tél: +228 90 12 14 58', 20, 32)
-    doc.text('Email: lydiaestuolk@gmail.com', 20, 37)
+    doc.text('Tél: +228 90 91 36 65', 20, 32)
+    doc.text('Email: estuolklyly@gmail.com', 20, 37)
 
     // Numéro de devis
     doc.setFontSize(16)
@@ -253,13 +253,13 @@ export default function DevisPage() {
     <div className="pt-20 min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="font-display text-4xl font-bold text-gray-900">
+        <div className="flex justify-between items-center mb-6 md:mb-8">
+          <h1 className="font-display text-2xl md:text-4xl font-bold text-gray-900">
             Générateur de Devis
           </h1>
           <button
             onClick={handleLogout}
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-sm md:text-base text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100"
           >
             Déconnexion
           </button>
@@ -269,11 +269,11 @@ export default function DevisPage() {
           {/* Colonne gauche - Formulaire */}
           <div className="lg:col-span-2 space-y-6">
             {/* Informations client */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
                 Informations Client
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <input
                   type="text"
                   placeholder="Nom du client *"
@@ -306,15 +306,15 @@ export default function DevisPage() {
             </div>
 
             {/* Ajouter un produit */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
                 Ajouter un Produit
               </h2>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <select
                   value={selectedProductId}
                   onChange={(e) => setSelectedProductId(e.target.value)}
-                  className="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors"
+                  className="flex-grow px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                 >
                   <option value="">Sélectionner un produit...</option>
                   {products.map(product => (
@@ -323,43 +323,45 @@ export default function DevisPage() {
                     </option>
                   ))}
                 </select>
-                <input
-                  type="number"
-                  min="1"
-                  value={productQuantity}
-                  onChange={(e) => setProductQuantity(parseInt(e.target.value) || 1)}
-                  className="w-20 px-4 py-2 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors"
-                  placeholder="Qté"
-                />
-                <button
-                  onClick={addProduct}
-                  className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
-                >
-                  Ajouter
-                </button>
+                <div className="flex gap-3 md:gap-4">
+                  <input
+                    type="number"
+                    min="1"
+                    value={productQuantity}
+                    onChange={(e) => setProductQuantity(parseInt(e.target.value) || 1)}
+                    className="w-20 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
+                    placeholder="Qté"
+                  />
+                  <button
+                    onClick={addProduct}
+                    className="bg-primary-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
+                  >
+                    Ajouter
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Ajouter une ligne personnalisée */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
                 Ligne Personnalisée
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 <input
                   type="text"
-                  placeholder="Description (ex: Prestation pose, Fourniture spéciale...)"
+                  placeholder="Description (ex: Prestation pose...)"
                   value={customDescription}
                   onChange={(e) => setCustomDescription(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                 />
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <input
                     type="number"
                     min="1"
                     value={customQuantity}
                     onChange={(e) => setCustomQuantity(parseInt(e.target.value) || 1)}
-                    className="w-24 px-4 py-2 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors"
+                    className="w-full sm:w-24 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                     placeholder="Qté"
                   />
                   <input
@@ -367,12 +369,12 @@ export default function DevisPage() {
                     min="0"
                     value={customPrice}
                     onChange={(e) => setCustomPrice(parseFloat(e.target.value) || 0)}
-                    className="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors"
+                    className="flex-grow px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                     placeholder="Prix unitaire (FCFA)"
                   />
                   <button
                     onClick={addCustomLine}
-                    className="bg-accent-600 text-white px-6 py-2 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
+                    className="bg-accent-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
                   >
                     Ajouter
                   </button>
@@ -383,38 +385,38 @@ export default function DevisPage() {
 
           {/* Colonne droite - Aperçu du devis */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl p-6 shadow-lg sticky top-24">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg lg:sticky lg:top-24">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
                 Aperçu du Devis
               </h2>
 
               {lines.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">
+                <p className="text-gray-500 text-center py-6 md:py-8 text-sm md:text-base">
                   Aucune ligne ajoutée
                 </p>
               ) : (
                 <>
-                  <div className="space-y-2 mb-6 max-h-96 overflow-y-auto">
+                  <div className="space-y-2 mb-4 md:mb-6 max-h-64 md:max-h-96 overflow-y-auto">
                     {lines.map(line => (
                       <div
                         key={line.id}
-                        className="flex items-start justify-between p-3 bg-gray-50 rounded-lg"
+                        className="flex items-start justify-between p-2 md:p-3 bg-gray-50 rounded-lg gap-2"
                       >
-                        <div className="flex-grow">
-                          <p className="font-semibold text-sm text-gray-900">
+                        <div className="flex-grow min-w-0">
+                          <p className="font-semibold text-xs md:text-sm text-gray-900 truncate">
                             {line.description}
                           </p>
                           <p className="text-xs text-gray-600">
                             {line.quantity} × {line.unitPrice.toLocaleString('fr-FR')} FCFA
                           </p>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <p className="font-semibold text-primary-600">
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <p className="font-semibold text-primary-600 text-xs md:text-sm">
                             {line.total.toLocaleString('fr-FR')} FCFA
                           </p>
                           <button
                             onClick={() => removeLine(line.id)}
-                            className="text-red-600 hover:text-red-700"
+                            className="text-red-600 hover:text-red-700 p-1"
                           >
                             ✕
                           </button>
@@ -424,16 +426,16 @@ export default function DevisPage() {
                   </div>
 
                   <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-6">
-                      <span className="font-display text-xl font-bold">TOTAL</span>
-                      <span className="font-display text-2xl font-bold text-primary-600">
+                    <div className="flex justify-between items-center mb-4 md:mb-6">
+                      <span className="font-display text-lg md:text-xl font-bold">TOTAL</span>
+                      <span className="font-display text-xl md:text-2xl font-bold text-primary-600">
                         {calculateTotal().toLocaleString('fr-FR')} FCFA
                       </span>
                     </div>
 
                     <button
                       onClick={generatePDF}
-                      className="w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-3 rounded-full font-semibold hover:shadow-xl transition-all duration-200"
+                      className="w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white px-4 md:px-6 py-3 rounded-full font-semibold hover:shadow-xl transition-all duration-200 text-sm md:text-base"
                     >
                       📄 Générer le PDF
                     </button>

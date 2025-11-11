@@ -42,11 +42,11 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-lg mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: lydiaestuolk@gmail.com</li>
-              <li>Tél: +228 90 12 14 58</li>
+              <li>Email: estuolklyly@gmail.com</li>
+              <li>Tél: +228 90 91 36 65</li>
               <li>
                 <a 
-                  href="https://wa.me/22898010907" 
+                  href="https://wa.me/22890913665" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"

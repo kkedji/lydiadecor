@@ -1,18 +1,55 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { products } from '@/data/products'
 
 export default function ProduitsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('Tous')
-  
-  const categories = ['Tous', ...Array.from(new Set(products.map(p => p.category)))]
-  
-  const filteredProducts = selectedCategory === 'Tous'
-    ? products
-    : products.filter(p => p.category === selectedCategory)
+  const [images, setImages] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Liste des images dans le dossier produits
+    // Ajoutez simplement vos images ici avec leur nom de fichier
+    const imageFiles = [
+      'armoire-lit.jpg',
+      'commode-bois.jpg',
+      'cuisine-moderne.jpg',
+      'suspension-cuivre.jpg',
+      'etagère-rangement.jpg',
+      'fauteil-tulip-cuir.jpg',
+      'fauteuil-terrasse.jpg',
+      'fauteuil-tulip.jpg',
+      'lit.jpg',
+      'lit-bois-design.jpg',
+      'lit-deux-places-simple-bois.jpg',
+      'lit-en-bois.jpg',
+      'lit-en-bois1.jpg',
+      'lit-en-boisjpg.jpg',
+      'lit-moderne.jpg',
+      'lit-style-moderne.jpg',
+      'master-bed.jpg',
+      'meuble tele.jpg',
+      'meuble-cuisine.jpg',
+      'meuble-deco.jpg',
+      'terrasse.jpg',
+      'table-4chaises.jpg',
+      'salon-complet.jpg',
+      'salle-a-manger.jpg',
+      'meuble-interieur.jpg',
+      'meuble-exterieur.jpg',
+      'meuble-terrasse.jpg',
+      'rideaux.jpg',
+      'miroir-debout.jpg',
+      'miroir-mural.jpg',
+      'miroir-mur.jpg',
+      'miroir-design.jpg',
+      'miroir-design 2.jpg'
+    ]
+    
+    setImages(imageFiles.map(img => `/content/produits/${img}`))
+    setLoading(false)
+  }, [])
 
   return (
     <div className="pt-20">
@@ -24,7 +61,7 @@ export default function ProduitsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="font-display text-5xl sm:text-6xl font-bold text-gray-900 mb-6"
           >
-            Nos Produits
+            Nos Articles
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -32,126 +69,79 @@ export default function ProduitsPage() {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Une sélection exclusive d'articles de décoration choisis avec soin pour
-            sublimer votre intérieur
+            Voici une sélection de nos articles disponibles sur commande
           </motion.p>
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="bg-white py-8 sticky top-20 z-40 shadow-sm">
+      {/* Gallery Section */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
-                  selectedCategory === category
-                    ? 'bg-primary-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {filteredProducts.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <div className="aspect-square relative overflow-hidden">
+          {loading ? (
+            <div className="text-center py-20">
+              <p className="text-xl text-gray-600">Chargement...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {images.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white aspect-square"
+                >
                   <Image
-                    src={product.image}
-                    alt={product.name}
+                    src={image}
+                    alt={`Article ${index + 1}`}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
-                  {product.isNew && (
-                    <div className="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      Nouveau
-                    </div>
-                  )}
-                  {!product.inStock && (
-                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                      <span className="bg-white text-gray-900 px-4 py-2 rounded-full font-semibold">
-                        Rupture de stock
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <div className="text-sm text-primary-600 font-semibold mb-2 uppercase tracking-wide">
-                    {product.category}
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {product.description}
-                  </p>
-                  {product.dimensions && (
-                    <p className="text-xs text-gray-500 mb-2">
-                      Dimensions: {product.dimensions}
-                    </p>
-                  )}
-                  {product.materials && (
-                    <p className="text-xs text-gray-500 mb-4">
-                      Matériaux: {product.materials}
-                    </p>
-                  )}
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-primary-600">
-                      {product.price.toLocaleString('fr-FR')} FCFA
-                    </span>
-                    <button className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-700 transition-colors duration-200">
-                      Contact
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
-          {filteredProducts.length === 0 && (
+          {images.length === 0 && !loading && (
             <div className="text-center py-20">
               <p className="text-xl text-gray-600">
-                Aucun produit trouvé dans cette catégorie.
+                Aucun article disponible pour le moment.
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Info Section */}
-      <section className="py-16 bg-white">
+      {/* Contact Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-5xl mb-4">🚚</div>
-              <h3 className="font-display text-xl font-bold mb-2">Livraison Gratuite</h3>
-              <p className="text-gray-600">Sur toutes les commandes de plus de 500 000 FCFA</p>
-            </div>
-            <div>
-              <div className="text-5xl mb-4">✨</div>
-              <h3 className="font-display text-xl font-bold mb-2">Qualité Premium</h3>
-              <p className="text-gray-600">Produits sélectionnés avec soin</p>
-            </div>
-            <div>
-              <div className="text-5xl mb-4">💬</div>
-              <h3 className="font-display text-xl font-bold mb-2">Conseil Personnalisé</h3>
-              <p className="text-gray-600">Notre équipe est là pour vous guider</p>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-display text-3xl font-bold text-gray-900 mb-6">
+              Vous souhaitez commander ?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Contactez-nous pour obtenir plus d'informations sur nos articles, 
+              connaître les disponibilités et recevoir un devis personnalisé.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://wa.me/22890913665"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors duration-200"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                WhatsApp
+              </a>
+              <a
+                href="/contact"
+                className="inline-block bg-primary-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
+              >
+                Formulaire de contact
+              </a>
             </div>
           </div>
         </div>
