@@ -1,16 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { products } from '@/data/products'
+import { useState } from 'react'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
-const PASSWORD = '1234' // Mot de passe à 4 chiffres - CHANGEZ-LE !
-
 interface DevisLine {
   id: string
-  type: 'product' | 'custom'
   description: string
   quantity: number
   unitPrice: number
@@ -18,87 +13,34 @@ interface DevisLine {
 }
 
 export default function DevisPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  
   // États du devis
   const [clientName, setClientName] = useState('')
   const [clientEmail, setClientEmail] = useState('')
   const [clientPhone, setClientPhone] = useState('')
   const [clientAddress, setClientAddress] = useState('')
   const [lines, setLines] = useState<DevisLine[]>([])
-  const [selectedProductId, setSelectedProductId] = useState('')
-  const [productQuantity, setProductQuantity] = useState(1)
   
-  // Ligne personnalisée
-  const [customDescription, setCustomDescription] = useState('')
-  const [customQuantity, setCustomQuantity] = useState(1)
-  const [customPrice, setCustomPrice] = useState(0)
+  // Ligne à ajouter
+  const [description, setDescription] = useState('')
+  const [quantity, setQuantity] = useState(1)
+  const [price, setPrice] = useState(0)
 
-  // Vérifier l'authentification au chargement
-  useEffect(() => {
-    const auth = localStorage.getItem('devis_auth')
-    if (auth === 'true') {
-      setIsAuthenticated(true)
-    }
-  }, [])
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (password === PASSWORD) {
-      setIsAuthenticated(true)
-      localStorage.setItem('devis_auth', 'true')
-      setError('')
-    } else {
-      setError('Code incorrect')
-    }
-  }
-
-  const handleLogout = () => {
-    setIsAuthenticated(false)
-    localStorage.removeItem('devis_auth')
-    setPassword('')
-  }
-
-  // Ajouter un produit
-  const addProduct = () => {
-    if (!selectedProductId) return
-    
-    const product = products.find(p => p.id === selectedProductId)
-    if (!product) return
+  // Ajouter une ligne
+  const addLine = () => {
+    if (!description.trim()) return
 
     const newLine: DevisLine = {
       id: Date.now().toString(),
-      type: 'product',
-      description: product.name,
-      quantity: productQuantity,
-      unitPrice: product.price,
-      total: product.price * productQuantity
+      description: description,
+      quantity: quantity,
+      unitPrice: price,
+      total: price * quantity
     }
 
     setLines([...lines, newLine])
-    setSelectedProductId('')
-    setProductQuantity(1)
-  }
-
-  // Ajouter une ligne personnalisée
-  const addCustomLine = () => {
-    if (!customDescription.trim()) return
-
-    const newLine: DevisLine = {
-      id: Date.now().toString(),
-      type: 'custom',
-      description: customDescription,
-      quantity: customQuantity,
-      unitPrice: customPrice,
-      total: customPrice * customQuantity
-    }
-
-    setLines([...lines, newLine])
-    setCustomDescription('')
-    setCustomQuantity(1)
-    setCustomPrice(0)
+    setDescription('')
+    setQuantity(1)
+    setPrice(0)
   }
 
   // Supprimer une ligne
@@ -198,71 +140,16 @@ export default function DevisPage() {
     doc.save(`${devisNumber.replace(/\s/g, '_')}_${clientName.replace(/\s/g, '_')}.pdf`)
   }
 
-  // Page de connexion
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-accent-50 flex items-center justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full"
-        >
-          <div className="text-center mb-8">
-            <h1 className="font-display text-3xl font-bold text-gray-900 mb-2">
-              Générateur de Devis
-            </h1>
-            <p className="text-gray-600">Accès réservé - Lydia Décor</p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
-                Code d'accès (4 chiffres)
-              </label>
-              <input
-                type="password"
-                maxLength={4}
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value)
-                  setError('')
-                }}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-center text-2xl tracking-widest"
-                placeholder="****"
-                autoFocus
-              />
-              {error && (
-                <p className="text-red-600 text-sm mt-2">{error}</p>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all duration-200"
-            >
-              Accéder
-            </button>
-          </form>
-        </motion.div>
-      </div>
-    )
-  }
-
   // Page du générateur de devis
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 md:mb-8">
+        <div className="mb-6 md:mb-8">
           <h1 className="font-display text-2xl md:text-4xl font-bold text-gray-900">
             Générateur de Devis
           </h1>
-          <button
-            onClick={handleLogout}
-            className="text-sm md:text-base text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100"
-          >
-            Déconnexion
-          </button>
+          <p className="text-gray-600 mt-2">Lydia Décor - Création de devis professionnels</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -305,76 +192,39 @@ export default function DevisPage() {
               </div>
             </div>
 
-            {/* Ajouter un produit */}
+            {/* Ajouter une ligne */}
             <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg">
               <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
-                Ajouter un Produit
-              </h2>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                <select
-                  value={selectedProductId}
-                  onChange={(e) => setSelectedProductId(e.target.value)}
-                  className="flex-grow px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
-                >
-                  <option value="">Sélectionner un produit...</option>
-                  {products.map(product => (
-                    <option key={product.id} value={product.id}>
-                      {product.name} - {product.price.toLocaleString('fr-FR')} FCFA
-                    </option>
-                  ))}
-                </select>
-                <div className="flex gap-3 md:gap-4">
-                  <input
-                    type="number"
-                    min="1"
-                    value={productQuantity}
-                    onChange={(e) => setProductQuantity(parseInt(e.target.value) || 1)}
-                    className="w-20 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
-                    placeholder="Qté"
-                  />
-                  <button
-                    onClick={addProduct}
-                    className="bg-primary-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
-                  >
-                    Ajouter
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Ajouter une ligne personnalisée */}
-            <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg">
-              <h2 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">
-                Ligne Personnalisée
+                Ajouter une Ligne au Devis
               </h2>
               <div className="space-y-3 md:space-y-4">
                 <input
                   type="text"
-                  placeholder="Description (ex: Prestation pose...)"
-                  value={customDescription}
-                  onChange={(e) => setCustomDescription(e.target.value)}
+                  placeholder="Nom du produit / service / prestation"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                 />
                 <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <input
                     type="number"
                     min="1"
-                    value={customQuantity}
-                    onChange={(e) => setCustomQuantity(parseInt(e.target.value) || 1)}
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
                     className="w-full sm:w-24 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                     placeholder="Qté"
                   />
                   <input
                     type="number"
                     min="0"
-                    value={customPrice}
-                    onChange={(e) => setCustomPrice(parseFloat(e.target.value) || 0)}
+                    value={price}
+                    onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
                     className="flex-grow px-3 md:px-4 py-2 md:py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 transition-colors text-sm md:text-base"
                     placeholder="Prix unitaire (FCFA)"
                   />
                   <button
-                    onClick={addCustomLine}
-                    className="bg-accent-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
+                    onClick={addLine}
+                    className="bg-primary-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold text-sm md:text-base whitespace-nowrap"
                   >
                     Ajouter
                   </button>
