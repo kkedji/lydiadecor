@@ -38,7 +38,7 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="https://wa.me/98010907"
+              href="https://wa.me/22898010907"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors duration-200"
@@ -96,7 +96,7 @@ export default function Header() {
                   </Link>
                 ))}
                 <a
-                  href="https://wa.me/98010907"
+                  href="https://wa.me/22898010907"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-3 py-2 mt-4 text-center bg-green-600 text-white rounded-full hover:bg-green-700"

@@ -62,8 +62,18 @@ export default function AProposPage() {
               viewport={{ once: true }}
               className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-accent-600/20"></div>
-              {/* Placeholder pour photo équipe */}
+              <Image
+                src="/team/lydia.jpg"
+                alt="Lydia - Fondatrice de Lydia Décor"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="font-display text-2xl font-bold mb-1">Lydia</h3>
+                <p className="text-lg">Fondatrice & Décoratrice</p>
+              </div>
             </motion.div>
           </div>
         </div>
