@@ -113,7 +113,7 @@ export default function ProduitsPage() {
                   )}
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-primary-600">
-                      {product.price} €
+                      {product.price.toLocaleString('fr-FR')} FCFA
                     </span>
                     <button className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-700 transition-colors duration-200">
                       Contact
@@ -141,7 +141,7 @@ export default function ProduitsPage() {
             <div>
               <div className="text-5xl mb-4">🚚</div>
               <h3 className="font-display text-xl font-bold mb-2">Livraison Gratuite</h3>
-              <p className="text-gray-600">Sur toutes les commandes de plus de 500€</p>
+              <p className="text-gray-600">Sur toutes les commandes de plus de 500 000 FCFA</p>
             </div>
             <div>
               <div className="text-5xl mb-4">✨</div>

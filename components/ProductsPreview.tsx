@@ -56,7 +56,7 @@ export default function ProductsPreview() {
                 <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
                   {product.name}
                 </h3>
-                <p className="text-primary-600 font-semibold text-lg">{product.price} €</p>
+                <p className="text-primary-600 font-semibold text-lg">{product.price.toLocaleString('fr-FR')} FCFA</p>
               </div>
             </motion.div>
           ))}
