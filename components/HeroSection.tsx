@@ -24,10 +24,10 @@ export default function HeroSection() {
             {/* Logo */}
             <div className="mb-8 flex justify-center">
               <Image
-                src="/logos/logo-accueil.png"
+                src="/logos/logo-accueil.jpg"
                 alt="Lydia Décor"
-                width={200}
-                height={200}
+                width={300}
+                height={300}
                 className="object-contain"
               />
             </div>

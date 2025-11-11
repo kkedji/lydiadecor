@@ -219,7 +219,7 @@ export default function AProposPage() {
             >
               <div className="relative w-full max-w-md aspect-square">
                 <Image
-                  src="/logos/logo-apropos.png"
+                  src="/logos/logo-apropos.jpg"
                   alt="Lydia Décor Logo"
                   fill
                   className="object-contain"

@@ -88,8 +88,8 @@ export default function DevisPage() {
     // Logo en haut à gauche
     try {
       const logo = new Image()
-      logo.src = '/logos/logo-accueil.png'
-      doc.addImage(logo, 'PNG', 15, 10, 30, 30)
+      logo.src = '/logos/logo-accueil.jpg'
+      doc.addImage(logo, 'JPEG', 15, 10, 30, 30)
     } catch (error) {
       // Si le logo n'est pas disponible, afficher le texte
       doc.setFontSize(24)
