@@ -70,6 +70,11 @@ export default function DevisPage() {
     return `LDC ${month}${year}-${String(newNumber).padStart(4, '0')}`
   }
 
+  // Formater les nombres avec espace comme séparateur de milliers
+  const formatPrice = (price: number) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  }
+
   // Générer le PDF
   const generatePDF = () => {
     if (!clientName.trim()) {
@@ -112,8 +117,8 @@ export default function DevisPage() {
     const tableData = lines.map(line => [
       line.description,
       line.quantity.toString(),
-      `${line.unitPrice.toLocaleString('fr-FR')} FCFA`,
-      `${line.total.toLocaleString('fr-FR')} FCFA`
+      `${formatPrice(line.unitPrice)} FCFA`,
+      `${formatPrice(line.total)} FCFA`
     ])
 
     autoTable(doc, {
@@ -122,7 +127,7 @@ export default function DevisPage() {
       body: tableData,
       foot: [[
         { content: 'TOTAL', colSpan: 3, styles: { halign: 'right', fontStyle: 'bold' } },
-        { content: `${calculateTotal().toLocaleString('fr-FR')} FCFA`, styles: { fontStyle: 'bold' } }
+        { content: `${formatPrice(calculateTotal())} FCFA`, styles: { fontStyle: 'bold' } }
       ]],
       theme: 'striped',
       headStyles: { fillColor: [147, 51, 234] },

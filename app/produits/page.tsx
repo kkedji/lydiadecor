@@ -15,7 +15,6 @@ export default function ProduitsPage() {
       'armoire-lit.jpg',
       'commode-bois.jpg',
       'cuisine-moderne.jpg',
-      'suspension-cuivre.jpg',
       'etagère-rangement.jpg',
       'fauteil-tulip-cuir.jpg',
       'fauteuil-terrasse.jpg',
