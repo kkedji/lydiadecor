@@ -43,7 +43,19 @@ export default function ProduitsPage() {
       'miroir-mural.jpg',
       'miroir-mur.jpg',
       'miroir-design.jpg',
-      'miroir-design 2.jpg'
+      'miroir-design 2.jpg',
+      'produit.jpg',
+      'produit2.jpg',
+      'produit1.jpg',
+      'produit3.jpg',
+      'produit4.jpg',
+      'produit5.jpg',
+      'produit6.jpg',
+      'produit7.jpg',
+      'produit8.jpg',
+      'produit9.jpg',
+      'produit10.jpg',
+      'produit11.jpg',
     ]
     
     setImages(imageFiles.map(img => `/content/produits/${img}`))
