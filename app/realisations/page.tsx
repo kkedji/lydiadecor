@@ -17,8 +17,9 @@ export default function RealisationsPage() {
       { file: 'realisation1.jpg', type: 'image' as const },
       { file: 'realisation2.jpg', type: 'image' as const },
       { file: 'realisation3.jpg', type: 'image' as const },
+      { file: 'realisation4.jpg', type: 'image' as const },
       { file: 'vid-realisation1.mp4', type: 'video' as const },
-     
+      { file: 'realisation2.mp4', type: 'video' as const },
       
       // Vidéos (dans public/content/realisations/videos/)
       // { file: 'mon-projet.mp4', type: 'video' as const },
